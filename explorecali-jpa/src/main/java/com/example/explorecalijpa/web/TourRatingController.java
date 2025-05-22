@@ -3,6 +3,7 @@ package com.example.explorecalijpa.web;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -89,8 +90,10 @@ public class TourRatingController {
    * @return The modified Rating DTO.
    */
   public RatingDto updateWithPatch(@PathVariable(value = "tourId") int tourId, @RequestBody @Valid RatingDto ratingDto) {
-      return ratingDto;
+      return new RatingDto(tourRatingService.updateSome(tourId, ratingDto.getCustomerId(), Optional.ofNullable(ratingDto.getScore()), Optional.ofNullable(ratingDto.getComment())));
   }
+
+// ^^ if no input, auto null 
 
   /**
    * Delete a Rating of a tour made by a customer
