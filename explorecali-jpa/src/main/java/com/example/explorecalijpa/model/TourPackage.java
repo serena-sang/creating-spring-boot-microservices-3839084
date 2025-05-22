@@ -16,6 +16,7 @@ import java.util.Objects;
 public class TourPackage {
     @Id
     private String code;
+    // id is a string: we are going to provide it
 
     @Column
     private String name;
